@@ -90,12 +90,10 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.16</version>
-            <scope>provided</scope>
+            <version>1.18.22</version>
         </dependency>
 
         <dependency>
@@ -155,7 +153,7 @@
                 <version>3.3.0</version>
                 <executions>
                     <execution>
-                        <id>test</id>
+                        <id>fatjar</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
