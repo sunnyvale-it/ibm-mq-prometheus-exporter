@@ -1,0 +1,39 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    prometheus:
+      enabled: 'true'
+    metrics:
+      enabled: 'true'
+    info:
+      enabled: 'true'
+  metrics:
+    export:
+      prometheus:
+        enabled: 'true'
+  security:
+    enabled: 'false'
+
+mq-config:
+  queue-managers:
+    - name: "TQLBSMA1"
+      host: "smlclt20221.syssede.systest.sanpaoloimi.com"
+      port: "1414"
+      username: ""
+      password: ""
+      channel: "APPW.DEF.SVRC"
+      queues:
+        - "QLBSMA0.DATAGRAM.WUO.UOS1INIZ.SQDB_BCK"
+        - "QLBSMA0.DATAGRAM.WUO.UOS1INIZ.SQDB"
+    - name: "TQLBSMA2"
+      host: "smlclt2023.syssede.systest.sanpaoloimi.com"
+      port: "1414"
+      username: ""
+      password: ""
+      channel: "APPW.DEF.SVRC"
+      queues:
+        - "QLBSMA0.DATAGRAM.WUO.UOS1INIZ.SQDB_BCK"
+        - "QLBSMA0.DATAGRAM.WUO.UOS1INIZ.SQDB"

@@ -1,0 +1,39 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    prometheus:
+      enabled: 'true'
+    metrics:
+      enabled: 'true'
+    info:
+      enabled: 'true'
+  metrics:
+    export:
+      prometheus:
+        enabled: 'true'
+  security:
+    enabled: 'false'
+
+mq-config:
+  queue-managers:
+    - name: "QM1"
+      host: "my.qm1host.com"
+      port: "1414"
+      username: "user"
+      password: "pass"
+      channel: "APP.CH.SVR"
+      queues:
+        - "Q1"
+        - "Q2"
+    - name: "QM2"
+      host: "my.qm2host.com"
+      port: "1414"
+      username: ""
+      password: ""
+      channel: "APP.CH.SVR"
+      queues:
+        - "Q1"
+        - "Q2"
