@@ -4,12 +4,14 @@ import com.ibm.mq.MQC;
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQQueue;
 import com.ibm.mq.MQQueueManager;
+import com.ibm.mq.jmqi.MQCNO;
 import it.sunnyvale.ibmmqexporter.models.QueueManager;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 @Service
 @Scope("singleton")
@@ -91,11 +93,12 @@ public class DataProvider {
                     username,
                     password
                     );
-            int openOptions = MQC.MQOO_INQUIRE;
+            int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
             MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
             depth = destQueue.getCurrentDepth();
             destQueue.close();
         } catch (Exception err) {
+            err.printStackTrace();
             throw new RuntimeException();
         }
         return depth;
