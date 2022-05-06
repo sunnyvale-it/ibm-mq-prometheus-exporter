@@ -1,4 +1,5 @@
 target
 **/*.log
+**/*.log*
 .idea
 dependency-reduced-pom.xml
