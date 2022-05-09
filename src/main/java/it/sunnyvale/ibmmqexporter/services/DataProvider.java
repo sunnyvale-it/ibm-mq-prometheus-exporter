@@ -4,14 +4,11 @@ import com.ibm.mq.MQC;
 import com.ibm.mq.MQEnvironment;
 import com.ibm.mq.MQQueue;
 import com.ibm.mq.MQQueueManager;
-import com.ibm.mq.jmqi.MQCNO;
-import it.sunnyvale.ibmmqexporter.models.QueueManager;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 @Service
 @Scope("singleton")
@@ -56,7 +53,8 @@ public class DataProvider {
         if (queueManagerHashMap.containsKey(queueManagerName)){
             MQQueueManager queueManager = queueManagerHashMap.get(queueManagerName);
             if( !queueManager.isOpen() || !queueManager.isConnected()){
-                queueManager = createQueueManager(host,
+                queueManager = createQueueManager(
+                        host,
                         port,
                         queueManagerName,
                         channel,
@@ -68,11 +66,11 @@ public class DataProvider {
             return queueManager;
         }else{
             return createQueueManager(host,
-                    port,
-                    queueManagerName,
-                    channel,
-                    username,
-                    password
+                        port,
+                        queueManagerName,
+                        channel,
+                        username,
+                        password
                     );
         }
     }
@@ -87,11 +85,11 @@ public class DataProvider {
         int depth = -1;
         try {
             MQQueueManager queueManager = getOrCreateQueueManager(host,
-                    port,
-                    queueManagerName,
-                    channel,
-                    username,
-                    password
+                        port,
+                        queueManagerName,
+                        channel,
+                        username,
+                        password
                     );
             int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
             MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
@@ -99,7 +97,7 @@ public class DataProvider {
             destQueue.close();
         } catch (Exception err) {
             err.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(err);
         }
         return depth;
     }
