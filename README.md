@@ -19,8 +19,13 @@ The exporter has been tested against the following software versions:
 
 ## Available metrics
 
+| Metric  | Type  | Description  | Labels  |
+|---|---|---|---|
+| ibm_mq_queue_current_depth  | Gauge  | Number of messages waiting to be read/processed in a queue  | channel, host, port, queue, queue_manager  |
 
-## Build the exporter
+More metrics en route...
+
+## How to build the exporter
 
 Before compiling the source code you have to download the **IBM MQ All Client** library (available at https://developer.ibm.com/articles/mq-downloads/), extract the com.ibm.mq.allclient.jar archive and install it in the local Maven repo using the following command:
 
@@ -36,7 +41,7 @@ $ mvn package
 
 The command above will produce a file named **ibm-mq-prometheus-exporter-1.0-SNAPSHOT.jar** in the **target** subdir. This is a uber-jar, containing everything that is needed to run the exporter.
 
-## Run the exporter
+## How to run the exporter
 
 After having built the exporter from the source code and before running it, copy the uber-jar in its final location (i.e. /opt/mqexporter). From now on, this folder will be called **EXPORTER_HOME** for the sake of brevity.
 
