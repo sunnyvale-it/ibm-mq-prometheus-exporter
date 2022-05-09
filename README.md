@@ -1,6 +1,6 @@
 # IBM MQ Prometheus Exporter
 
-This repo contains the source code of a Prometheus exporter for IBM MQ. 
+This repo contains the source code of a Java-based Prometheus exporter for IBM MQ. 
 
 In the Prometheus vocabulary, an exporter is an application that connects to a target system (in this case an IBM MQ Queue Manager) and "exports" all the measurements in **Prometheus exposition format 0.0.4** (or **OpenMetrics 1.0**) to be scraped by Prometheus itself.
 
