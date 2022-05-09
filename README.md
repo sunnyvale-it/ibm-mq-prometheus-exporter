@@ -6,7 +6,7 @@ In the Prometheus vocabulary, an exporter is an application that connects to a t
 
 ## Disclaimer
 
-The source code contained in this repo does not belong to and is not supported/endorsed by IBM or any of its subsidiaries
+The source code contained in this repo does not belong to and is not supported/endorsed by IBM or any of its subsidiaries.
 
 ## Compatibility
 
