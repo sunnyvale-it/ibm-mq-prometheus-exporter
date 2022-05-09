@@ -65,7 +65,7 @@ public class DataProvider {
                 );
                 queueManagerHashMap.put(queueManagerName,queueManager);
             }
-            return queueManagerHashMap.get(queueManagerName);
+            return queueManager;
         }else{
             return createQueueManager(host,
                     port,
