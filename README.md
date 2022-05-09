@@ -36,7 +36,7 @@ The command above will produce a file named **ibm-mq-prometheus-exporter-1.0-SNA
 
 ## Run the exporter
 
-After having built the exporter from the source code and before running it, copy the uber-jar in its final location (i.e. /opt/mqexporter). From now on, this folder will be called EXPORTER_HOME for the sake of brevity.
+After having built the exporter from the source code and before running it, copy the uber-jar in its final location (i.e. /opt/mqexporter). From now on, this folder will be called **EXPORTER_HOME** for the sake of brevity.
 
 ```console
 $ cp target/ibm-mq-prometheus-exporter-1.0-SNAPSHOT.jar /opt/mqexporter
@@ -49,8 +49,8 @@ $ cd /opt/mqexporter
 $ mkdir config
 ```
 
-In the config subfolder, create the exporter's config file (called application.yaml) as showed here after.
-Before running the following command, please adapt the **mq-config** section with details of your MQ installation (queue managers, host, port, username, password and queues).
+In the config subfolder, create the exporter's config file (called **application.yaml**) as showed here after.
+Before running the following command, please adapt the **mq-config** section with details of your MQ installation (queue managers, host, port, username, password, channel and queues).
 
 ```console
 $ cat > config/application.yaml << EOF
