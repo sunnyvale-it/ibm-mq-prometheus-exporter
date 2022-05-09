@@ -1,6 +1,8 @@
 # IBM MQ Prometheus Exporter
 
-This repo contains the source code of a Prometheus exporter for IBM MQ. In the Prometheus vocabulary, an exporter is an application that connects to a target system (in this case an IBM MQ Queue Manager) and "exports" all the measurements in **Prometheus exposition format 0.0.4** (or **OpenMetrics 1.0**) to be scraped by Prometheus itself.
+This repo contains the source code of a Prometheus exporter for IBM MQ. 
+
+In the Prometheus vocabulary, an exporter is an application that connects to a target system (in this case an IBM MQ Queue Manager) and "exports" all the measurements in **Prometheus exposition format 0.0.4** (or **OpenMetrics 1.0**) to be scraped by Prometheus itself.
 
 ## Disclaimer
 
@@ -50,6 +52,7 @@ $ mkdir config
 ```
 
 In the config subfolder, create the exporter's config file (called **application.yaml**) as showed here after.
+
 Before running the following command, please adapt the **mq-config** section with details of your MQ installation (queue managers, host, port, username, password, channel and queues).
 
 ```console
