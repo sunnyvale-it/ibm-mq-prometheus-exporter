@@ -116,7 +116,7 @@ $ java -jar ibm-mq-prometheus-exporter-1.0-SNAPSHOT.jar
 
 The exporter by default opens HTTP port **8080** and metrics can be accessed at the **/actuator/prometheus** URI path.
 
-If running on localhost, the exporter can be tested using **curl** such as: 
+If running on localhost, the exporter can be tested using **curl** command such as: 
 
 ```console
 $ curl -s localhost:8080/actuator/prometheus
