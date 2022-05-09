@@ -45,7 +45,7 @@ The command above will produce a file named **ibm-mq-prometheus-exporter-1.0-SNA
 
 ## How to run the exporter
 
-After having built the exporter from the source code and before running it, copy the uber-jar in its final location (i.e. /opt/mqexporter). From now on, this folder will be called **EXPORTER_HOME** for the sake of brevity.
+After having built the exporter from the source code and before running it, copy the uber-jar in its final location (i.e. /opt/mqexporter). From now on, this folder will be named the **EXPORTER_HOME** directory for the sake of brevity.
 
 ```console
 $ cp target/ibm-mq-prometheus-exporter-1.0-SNAPSHOT.jar /opt/mqexporter
@@ -106,7 +106,7 @@ mq-config:
 EOF
 ```
 
-Finally, in the EXPORTER_HOME directory, launch the exporter as showed:
+Finally, from the EXPORTER_HOME directory, launch the exporter as showed:
 
 ```console
 $ java -jar ibm-mq-prometheus-exporter-1.0-SNAPSHOT.jar
