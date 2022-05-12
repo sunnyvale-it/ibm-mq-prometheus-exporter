@@ -24,6 +24,7 @@ The exporter makes available to Prometheus the following metrics:
 | Metric  | Type  | Description  | Labels  |
 |---|---|---|---|
 | ibm_mq_queue_current_depth  | Gauge  | Number of messages waiting to be read/processed in a queue  | channel, host, port, queue, queue_manager  |
+| ibm_mq_queue_max_depth  | Gauge  | The max queue capacity  | channel, host, port, queue, queue_manager  |
 
 More metrics en route...
 

@@ -3,3 +3,4 @@ target
 **/*.log*
 .idea
 dependency-reduced-pom.xml
+.DS_Store

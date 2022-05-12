@@ -75,7 +75,7 @@ public class DataProvider {
         }
     }
 
-    public double getQueueCurrentDepth(String host,
+    public int getQueueCurrentDepth(String host,
                                        String port,
                                        String queueManagerName,
                                        String channel,
@@ -94,6 +94,33 @@ public class DataProvider {
             int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
             MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
             depth = destQueue.getCurrentDepth();
+            destQueue.close();
+        } catch (Exception err) {
+            err.printStackTrace();
+            throw new RuntimeException(err);
+        }
+        return depth;
+    }
+
+    public int getQueueMaxDepth(String host,
+                                       String port,
+                                       String queueManagerName,
+                                       String channel,
+                                       String username,
+                                       String password,
+                                       String queue){
+        int depth = -1;
+        try {
+            MQQueueManager queueManager = getOrCreateQueueManager(host,
+                    port,
+                    queueManagerName,
+                    channel,
+                    username,
+                    password
+            );
+            int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
+            MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
+            depth = destQueue.getMaximumDepth();
             destQueue.close();
         } catch (Exception err) {
             err.printStackTrace();

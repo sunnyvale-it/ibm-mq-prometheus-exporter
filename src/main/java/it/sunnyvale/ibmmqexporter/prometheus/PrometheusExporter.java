@@ -26,17 +26,60 @@ public class PrometheusExporter {
                 .forEach(queueManager -> queueManager
                         .getQueues()
                         .stream()
-                        .forEach(queue -> this.registerQueueCurrentDepthMetric(
-                                    queueManager.getHost(),
-                                    queueManager.getPort(),
-                                    queueManager.getName(),
-                                    queueManager.getUsername(),
-                                    queueManager.getPassword(),
-                                    queueManager.getChannel(),
-                                    queue
-                                )
+                        .forEach(queue -> {
+                                    this.registerQueueCurrentDepthMetric(
+                                            queueManager.getHost(),
+                                            queueManager.getPort(),
+                                            queueManager.getName(),
+                                            queueManager.getUsername(),
+                                            queueManager.getPassword(),
+                                            queueManager.getChannel(),
+                                            queue
+                                        );
+                                    this.registerQueueMaxDepthMetric(
+                                            queueManager.getHost(),
+                                            queueManager.getPort(),
+                                            queueManager.getName(),
+                                            queueManager.getUsername(),
+                                            queueManager.getPassword(),
+                                            queueManager.getChannel(),
+                                            queue
+                                    );
+                            }
                         )
                 );
+    }
+
+    private void registerQueueMaxDepthMetric(
+            String host,
+            String port,
+            String queueManager,
+            String username,
+            String password,
+            String channel,
+            String queue
+    ){
+
+        Gauge gauge = Gauge
+                .builder("ibm_mq_queue_max_depth",
+                        dataProvider,
+                        value -> value.getQueueMaxDepth(
+                                host,
+                                port,
+                                queueManager,
+                                channel,
+                                username,
+                                password,
+                                queue
+                        )
+                )
+                .description("The max queue capacity")
+                .tags("host",host)
+                .tags("port",port)
+                .tags("channel",channel)
+                .tags("queue-manager",queueManager)
+                .tags("queue",queue)
+                .register(Metrics.globalRegistry);
     }
 
     private void registerQueueCurrentDepthMetric(
@@ -62,7 +105,7 @@ public class PrometheusExporter {
                                 queue
                         )
                 )
-                .description("bla bla")
+                .description("Number of messages waiting to be read/processed in a queue")
                 .tags("host",host)
                 .tags("port",port)
                 .tags("channel",channel)
