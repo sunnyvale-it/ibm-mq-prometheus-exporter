@@ -75,41 +75,14 @@ public class DataProvider {
         }
     }
 
-    public int getQueueCurrentDepth(String host,
-                                       String port,
-                                       String queueManagerName,
-                                       String channel,
-                                       String username,
-                                       String password,
-                                       String queue){
-        int depth = -1;
-        try {
-            MQQueueManager queueManager = getOrCreateQueueManager(host,
-                        port,
-                        queueManagerName,
-                        channel,
-                        username,
-                        password
-                    );
-            int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
-            MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
-            depth = destQueue.getCurrentDepth();
-            destQueue.close();
-        } catch (Exception err) {
-            err.printStackTrace();
-            throw new RuntimeException(err);
-        }
-        return depth;
-    }
-
-    public int getQueueMaxDepth(String host,
-                                       String port,
-                                       String queueManagerName,
-                                       String channel,
-                                       String username,
-                                       String password,
-                                       String queue){
-        int depth = -1;
+    public int getQueueWritersCount(String host,
+                                    String port,
+                                    String queueManagerName,
+                                    String channel,
+                                    String username,
+                                    String password,
+                                    String queue){
+        int value = -1;
         try {
             MQQueueManager queueManager = getOrCreateQueueManager(host,
                     port,
@@ -120,13 +93,94 @@ public class DataProvider {
             );
             int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
             MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
-            depth = destQueue.getMaximumDepth();
+            value = destQueue.getOpenOutputCount();
             destQueue.close();
         } catch (Exception err) {
             err.printStackTrace();
             throw new RuntimeException(err);
         }
-        return depth;
+        return value;
+    }
+
+    public int getQueueReadersCount(String host,
+                                    String port,
+                                    String queueManagerName,
+                                    String channel,
+                                    String username,
+                                    String password,
+                                    String queue){
+        int value = -1;
+        try {
+            MQQueueManager queueManager = getOrCreateQueueManager(host,
+                    port,
+                    queueManagerName,
+                    channel,
+                    username,
+                    password
+            );
+            int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
+            MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
+            value = destQueue.getOpenInputCount() - 1;
+            destQueue.close();
+        } catch (Exception err) {
+            err.printStackTrace();
+            throw new RuntimeException(err);
+        }
+        return value;
+    }
+
+    public int getQueueCurrentDepth(String host,
+                                       String port,
+                                       String queueManagerName,
+                                       String channel,
+                                       String username,
+                                       String password,
+                                       String queue){
+        int value = -1;
+        try {
+            MQQueueManager queueManager = getOrCreateQueueManager(host,
+                        port,
+                        queueManagerName,
+                        channel,
+                        username,
+                        password
+                    );
+            int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
+            MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
+            value = destQueue.getCurrentDepth();
+            destQueue.close();
+        } catch (Exception err) {
+            err.printStackTrace();
+            throw new RuntimeException(err);
+        }
+        return value;
+    }
+
+    public int getQueueMaxDepth(String host,
+                                       String port,
+                                       String queueManagerName,
+                                       String channel,
+                                       String username,
+                                       String password,
+                                       String queue){
+        int value = -1;
+        try {
+            MQQueueManager queueManager = getOrCreateQueueManager(host,
+                    port,
+                    queueManagerName,
+                    channel,
+                    username,
+                    password
+            );
+            int openOptions = MQC.MQOO_INPUT_AS_Q_DEF | MQC.MQOO_INQUIRE;
+            MQQueue destQueue = queueManager.accessQueue(queue, openOptions);
+            value = destQueue.getMaximumDepth();
+            destQueue.close();
+        } catch (Exception err) {
+            err.printStackTrace();
+            throw new RuntimeException(err);
+        }
+        return value;
     }
 
 }

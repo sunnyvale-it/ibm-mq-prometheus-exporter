@@ -45,9 +45,91 @@ public class PrometheusExporter {
                                             queueManager.getChannel(),
                                             queue
                                     );
+                                    this.registerQueueReadersCountMetric(
+                                            queueManager.getHost(),
+                                            queueManager.getPort(),
+                                            queueManager.getName(),
+                                            queueManager.getUsername(),
+                                            queueManager.getPassword(),
+                                            queueManager.getChannel(),
+                                            queue
+                                    );
+                                    this.registerQueueWritersCountMetric(
+                                            queueManager.getHost(),
+                                            queueManager.getPort(),
+                                            queueManager.getName(),
+                                            queueManager.getUsername(),
+                                            queueManager.getPassword(),
+                                            queueManager.getChannel(),
+                                            queue
+                                    );
                             }
                         )
                 );
+    }
+
+    private void registerQueueWritersCountMetric(
+            String host,
+            String port,
+            String queueManager,
+            String username,
+            String password,
+            String channel,
+            String queue
+    ){
+
+        Gauge gauge = Gauge
+                .builder("ibm_mq_queue_writers_count",
+                        dataProvider,
+                        value -> value.getQueueWritersCount(
+                                host,
+                                port,
+                                queueManager,
+                                channel,
+                                username,
+                                password,
+                                queue
+                        )
+                )
+                .description("The number writers registered to a queue")
+                .tags("host",host)
+                .tags("port",port)
+                .tags("channel",channel)
+                .tags("queue-manager",queueManager)
+                .tags("queue",queue)
+                .register(Metrics.globalRegistry);
+    }
+
+    private void registerQueueReadersCountMetric(
+            String host,
+            String port,
+            String queueManager,
+            String username,
+            String password,
+            String channel,
+            String queue
+    ){
+
+        Gauge gauge = Gauge
+                .builder("ibm_mq_queue_readers_count",
+                        dataProvider,
+                        value -> value.getQueueReadersCount(
+                                host,
+                                port,
+                                queueManager,
+                                channel,
+                                username,
+                                password,
+                                queue
+                        )
+                )
+                .description("The number readers registered to a queue")
+                .tags("host",host)
+                .tags("port",port)
+                .tags("channel",channel)
+                .tags("queue-manager",queueManager)
+                .tags("queue",queue)
+                .register(Metrics.globalRegistry);
     }
 
     private void registerQueueMaxDepthMetric(
