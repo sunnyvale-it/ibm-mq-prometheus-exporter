@@ -91,7 +91,7 @@ public class PrometheusExporter {
                                 queue
                         )
                 )
-                .description("The number writers registered to a queue")
+                .description("The number of writers registered to a queue")
                 .tags("host",host)
                 .tags("port",port)
                 .tags("channel",channel)
@@ -123,7 +123,7 @@ public class PrometheusExporter {
                                 queue
                         )
                 )
-                .description("The number readers registered to a queue")
+                .description("The number of readers registered to a queue")
                 .tags("host",host)
                 .tags("port",port)
                 .tags("channel",channel)
