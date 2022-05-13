@@ -75,7 +75,7 @@ public class DataProvider {
         }
     }
 
-    public int getQueueWritersCount(String host,
+    public int getQueueWriters(String host,
                                     String port,
                                     String queueManagerName,
                                     String channel,
@@ -102,7 +102,7 @@ public class DataProvider {
         return value;
     }
 
-    public int getQueueReadersCount(String host,
+    public int getQueueReaders(String host,
                                     String port,
                                     String queueManagerName,
                                     String channel,

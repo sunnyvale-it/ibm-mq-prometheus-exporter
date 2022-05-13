@@ -45,7 +45,7 @@ public class PrometheusExporter {
                                             queueManager.getChannel(),
                                             queue
                                     );
-                                    this.registerQueueReadersCountMetric(
+                                    this.registerQueueReadersMetric(
                                             queueManager.getHost(),
                                             queueManager.getPort(),
                                             queueManager.getName(),
@@ -54,7 +54,7 @@ public class PrometheusExporter {
                                             queueManager.getChannel(),
                                             queue
                                     );
-                                    this.registerQueueWritersCountMetric(
+                                    this.registerQueueWritersMetric(
                                             queueManager.getHost(),
                                             queueManager.getPort(),
                                             queueManager.getName(),
@@ -68,7 +68,7 @@ public class PrometheusExporter {
                 );
     }
 
-    private void registerQueueWritersCountMetric(
+    private void registerQueueWritersMetric(
             String host,
             String port,
             String queueManager,
@@ -79,9 +79,9 @@ public class PrometheusExporter {
     ){
 
         Gauge gauge = Gauge
-                .builder("ibm_mq_queue_writers_count",
+                .builder("ibm_mq_queue_writers",
                         dataProvider,
-                        value -> value.getQueueWritersCount(
+                        value -> value.getQueueWriters(
                                 host,
                                 port,
                                 queueManager,
@@ -100,7 +100,7 @@ public class PrometheusExporter {
                 .register(Metrics.globalRegistry);
     }
 
-    private void registerQueueReadersCountMetric(
+    private void registerQueueReadersMetric(
             String host,
             String port,
             String queueManager,
@@ -111,9 +111,9 @@ public class PrometheusExporter {
     ){
 
         Gauge gauge = Gauge
-                .builder("ibm_mq_queue_readers_count",
+                .builder("ibm_mq_queue_readers",
                         dataProvider,
-                        value -> value.getQueueReadersCount(
+                        value -> value.getQueueReaders(
                                 host,
                                 port,
                                 queueManager,
